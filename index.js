@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import mysql from 'mysql2';
+
 import { DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME } from './config.js';
 
 const app = express();
@@ -83,6 +84,13 @@ app.delete("/delete/:id", (req, res) => {
   });
 });
 
+connection.connect((err) => {
+    if (err) {
+      console.error('Error de conexión: ', err.stack);
+      return;
+    }
+    console.log('Conectado a la base de datos con ID: ' + connection.threadId);
+  });
 
 
 // Verificar que el servidor esté encendido
